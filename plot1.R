@@ -13,6 +13,10 @@ rawDT <- data.table(rawDF)
 # subset the data to this date range: 2007-02-01 to 2007-02-02 - 2 day period
 subDT <- subset(rawDT, (Date == as.Date("2007-02-01") | Date == as.Date("2007-02-02")))
 
+hist(subDT$Global_active_power, col="red", xlab="Global Active Power (kilowatts)", main="Global Active Power")
 
+# dump to png
+dev.copy(png, file = "plot1.png")
+dev.off()
 
 
