@@ -12,8 +12,13 @@ rawDT <- data.table(rawDF)
 subDT <- subset(rawDT, (Date == as.Date("2007-02-01") | Date == as.Date("2007-02-02")))
 subDT[, DateTime:= as.POSIXct(paste(subDT$Date, subDT$Time), format="%Y-%m-%d %H:%M:%S")]
 
-with(subDT, plot(DateTime, Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)"))
+with(subDT, plot(DateTime, Sub_metering_1, type="l", xlab="", ylab="Energy sub metering"))
+with(subDT, points(DateTime, Sub_metering_2, type="l", col="red"))
+with(subDT, points(DateTime, Sub_metering_3, type="l", col="blue"))
+
+# legend
+legend("topright", lty=c(1,1,1), col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
 # dump to png
-dev.copy(png, file = "plot2.png")
+dev.copy(png, file = "plot3.png")
 dev.off()
